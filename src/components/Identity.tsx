@@ -43,12 +43,13 @@ export default function Identity() {
 
     return (
         <section
-            className="relative bg-[#0B0B0E] py-32 lg:py-48 flex justify-center"
+            className="relative overflow-hidden bg-[#0B0B0E] py-32 lg:py-48"
             id="identity"
         >
-            <div className="lg:px-12 bg-red-500">
+            <div className="mx-auto max-w-[1600px] w-75 px-6 lg:px-12">
+                {/* Section header */}
                 <div
-                    className="mb-16 flex items-center gap-4 lg:mb-24 bg-yellow-400"
+                    className="mb-16 flex items-center gap-4 lg:mb-24"
                     data-animate="fade-up"
                 >
                     <span className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[#E50027]">
@@ -58,6 +59,7 @@ export default function Identity() {
                     <span className="h-px flex-1 bg-white/[0.08]" data-line />
                 </div>
 
+                {/* Main statement */}
                 <div className="space-y-12 lg:space-y-20">
                     <h2
                         className="font-display text-[clamp(2.5rem,7vw,6.5rem)] font-black leading-[0.9] tracking-tight"
