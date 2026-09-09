@@ -14,8 +14,7 @@ export const CtaSection: React.FC<CtaSectionProps> = ({
             id="recrutement"
             className="py-24 bg-[#050508] border-b border-white/10 relative overflow-hidden bg-grid-mesh"
         >
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#E50027]/10 blur-[150px] pointer-events-none rounded-full" />
-
+            <div className="absolute top-1/2 left-1/2 max-w-[1600px] -translate-x-1/2 -translate-y-1/2 w-75 h-[300px] bg-[#E50027]/10 blur-[150px] pointer-events-none rounded-full" />
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
                 {/* Kicker */}
                 <div className="inline-flex items-center gap-3 mb-6">

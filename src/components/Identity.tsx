@@ -43,10 +43,10 @@ export default function Identity() {
 
     return (
         <section
-            className="relative overflow-hidden bg-[#0B0B0E] py-32 lg:py-48 flex!"
+            className="relative overflow-hidden bg-[#0B0B0E] py-32 lg:py-48 flex justify-center"
             id="identity"
         >
-            <div className="mx-auto px-6 lg:px-12">
+            <div className="max-w-[1600px] px-6 lg:px-12">
                 {/* Section header */}
                 <div
                     className="mb-16 flex items-center gap-4 lg:mb-24"
