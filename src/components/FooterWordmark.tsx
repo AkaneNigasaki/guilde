@@ -70,9 +70,9 @@ export function FooterWordmark() {
     });
     const boxRef = useScrollEffect({ start: "top 75%", end: "bottom 25%" });
     return (
-        <div className="min-h-87.5 relative dark-theme mx-auto">
+        <div className="min-h-87.5 max-[600px]:min-h-75 relative dark-theme mx-auto">
             <div
-                className="mx-auto w-full overflow-hidden pt-20 lg:pt-32 pb-10"
+                className="mx-auto w-full overflow-hidden pt-20 lg:pt-32"
                 ref={boxRef}
             >
                 <h2
