@@ -46,10 +46,9 @@ export default function Identity() {
             className="relative bg-[#0B0B0E] py-32 lg:py-48 flex justify-center"
             id="identity"
         >
-            <div className="max-w-[1600px] px-6 lg:px-12">
-                {/* Section header */}
+            <div className="max-w-[1600px] px-6 lg:px-12 bg-red-500">
                 <div
-                    className="mb-16 flex items-center gap-4 lg:mb-24"
+                    className="mb-16 flex items-center gap-4 lg:mb-24 bg-yellow-400"
                     data-animate="fade-up"
                 >
                     <span className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[#E50027]">
