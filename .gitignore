@@ -9,3 +9,4 @@ coverage/
 .originkit
 !.env.example
 .originkit/
+.vscode/
