@@ -61,10 +61,10 @@ export const Hero: React.FC<HeroProps> = ({
             onMouseLeave={handleMouseLeave}
             className="relative min-h-[94vh] pt-36 pb-20 flex items-center justify-center border-b border-white/10 bg-[#050505] overflow-hidden bg-grid-mesh"
         >
-            <div className="relative z-10 max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div className="relative z-10 px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
                     <div className="lg:col-span-8 flex flex-col justify-center text-left">
-                        <h1 className="font-sen font-[700] max-lg:text-center text-5xl sm:text-6xl lg:text-[84px] leading-[0.92] tracking-tighter uppercase mb-6 text-white">
+                        <h1 className="font-sen font-bold max-lg:text-center text-5xl sm:text-6xl lg:text-[84px] leading-[0.92] tracking-tighter uppercase mb-6 text-white">
                             <SplitText
                                 text="Bienvenue, chez"
                                 className="font-sen  font-[700] text-5xl sm:text-6xl lg:text-[84px] leading-[0.92] uppercase mb-6 text-white"

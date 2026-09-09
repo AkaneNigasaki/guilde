@@ -19,9 +19,9 @@ export const Footer: React.FC = () => {
     return (
         <footer
             id="main-footer"
-            className="bg-[#050508] border-t border-white/10 text-white/60 pt-16"
+            className="bg-[#050508] border-t border-white/10 text-white/60 pt-16 flex"
         >
-            <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Main Footer Row */}
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/10">
                     {/* Clan Info */}

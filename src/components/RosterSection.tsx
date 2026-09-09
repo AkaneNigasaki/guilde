@@ -71,9 +71,10 @@ export const RosterSection: React.FC = () => {
                 bg-[#070707]
                 py-32
                 lg:py-48
+                flex!
             "
         >
-            <div className="mx-auto w-full max-w-[1600px] px-6 lg:px-12">
+            <div className="mx-auto w-fit px-6 lg:px-12">
                 <div className="mb-16 lg:mb-24" data-animate="fade-up">
                     <div className="mb-4 flex items-center gap-4 lg:pb-16">
                         <span

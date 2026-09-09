@@ -285,7 +285,7 @@ export function SocialInfiniteScroll({
           relative
           z-20
           w-full
-          max-w-[1600px]
+          px]
           mx-auto
           px-4
           sm:px-6

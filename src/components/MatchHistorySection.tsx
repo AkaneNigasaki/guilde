@@ -6,7 +6,7 @@ export function MatchHistorySection() {
             id="matches"
             className="relative py-32 lg:py-48 bg-surface overflow-hidden"
         >
-            <div className="max-w-[1600px] mx-auto px-6 lg:px-12">
+            <div className="px] mx-auto px-6 lg:px-12">
                 <div
                     className="flex items-center gap-4 mb-16 lg:mb-24"
                     data-animate="fade-up"
