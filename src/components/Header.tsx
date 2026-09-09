@@ -1,11 +1,20 @@
 import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
-import { Menu, X, Radio, ChevronRight, Globe, Shield } from "lucide-react";
+import { Menu, X, ChevronRight, Globe } from "lucide-react";
 import { CLAN_INFO } from "../data/clanData";
 import logo from "../assets/images/logo-dark-mode.png";
-import { log } from "console";
 import { soundManager } from "../hooks/audio";
-import { NodeDiagram } from "./ui/Nodediagram";
+
+// Déplacer navItems en dehors du composant pour la stabilité des dépendances
+const navItems = [
+    { id: "accueil", label: "ACCUEIL" },
+    { id: "identity", label: "IDENTITÉ" },
+    { id: "membres", label: "MEMBRES" },
+    { id: "matches", label: "MATCH CENTER" },
+    { id: "sociallink", label: "LIENS OFFICIELS" },
+    { id: "clan", label: "STATS DE LA GUILDE" },
+];
+
 interface HeaderProps {
     onOpenRecruitment: () => void;
     activeSection: string;
@@ -20,12 +29,13 @@ export const Header: React.FC<HeaderProps> = ({
     const [scrolled, setScrolled] = useState(false);
     const [lang, setLang] = useState<"FR" | "EN">("FR");
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [country, setCountry] = useState("");
 
-    // Refs used for the GSAP expand/stagger animation (same mechanism as CardNav)
+    // Refs used for the GSAP expand/stagger animation
     const drawerRef = useRef<HTMLDivElement | null>(null);
     const itemRefs = useRef<HTMLDivElement[]>([]);
     const tlRef = useRef<gsap.core.Timeline | null>(null);
-    const [country, setCountry] = useState("");
+
     useEffect(() => {
         async function getCipherInfo() {
             try {
@@ -47,21 +57,44 @@ export const Header: React.FC<HeaderProps> = ({
         }
         getCipherInfo();
     }, []);
+
+    // Gestion du scroll : background du header + mise à jour de la section active
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+            const scrollY = window.scrollY;
 
-    const navItems = [
-        { id: "accueil", label: "ACCUEIL" },
-        { id: "membres", label: "Membres" },
-        { id: "evenements", label: "MATCH CENTER" },
-        { id: "palmares", label: "PALMARÈS" },
-        { id: "clan", label: "STATS DE LA GUILDE" },
-    ];
+            // 1. Gérer l'apparence du header
+            setScrolled(scrollY > 20);
+
+            // 2. Déterminer la section active en fonction du scroll
+            let currentSection = "accueil"; // Valeur par défaut
+            const headerOffset = 150; // Marge pour compenser la hauteur du header fixe
+
+            for (const item of navItems) {
+                const element = document.getElementById(item.id);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    // Si le haut de la section est passé sous la barre de navigation (avec une marge)
+                    if (rect.top <= headerOffset) {
+                        currentSection = item.id;
+                    }
+                }
+            }
+
+            // Mise à jour de l'état uniquement si la section a changé (optimisation)
+            setActiveSection((prev) =>
+                prev !== currentSection ? currentSection : prev,
+            );
+        };
+
+        // Écouteur passif pour de meilleures performances de scroll
+        window.addEventListener("scroll", handleScroll, { passive: true });
+
+        // Appel initial pour définir la bonne section au chargement de la page
+        handleScroll();
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [setActiveSection]);
 
     const closeDrawer = () => {
         const tl = tlRef.current;
@@ -78,7 +111,14 @@ export const Header: React.FC<HeaderProps> = ({
         closeDrawer();
         const element = document.getElementById(id);
         if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
+            // On ajoute un petit offset pour que le header ne cache pas le titre de la section
+            const headerOffset = 100;
+            const elementPosition =
+                element.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({
+                top: elementPosition - headerOffset,
+                behavior: "smooth",
+            });
         }
     };
 
@@ -132,7 +172,6 @@ export const Header: React.FC<HeaderProps> = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // Recalculate the target height on resize while the drawer is open
     useEffect(() => {
         const handleResize = () => {
             if (!mobileMenuOpen || !drawerRef.current) return;
@@ -258,7 +297,7 @@ export const Header: React.FC<HeaderProps> = ({
                 </div>
             </div>
 
-            {/* Mobile Drawer - now animated (GSAP height + stagger, like CardNav) */}
+            {/* Mobile Drawer */}
             <div
                 id="mobile-nav-drawer"
                 ref={drawerRef}
@@ -272,10 +311,16 @@ export const Header: React.FC<HeaderProps> = ({
                             <div key={item.id} ref={setItemRef(idx)}>
                                 <button
                                     onClick={() => handleNavClick(item.id)}
-                                    className="w-full text-left font-sen text-lg font-bold uppercase tracking-wider text-white/80 hover:text-[#E50027] py-2 border-b border-white/5 flex items-center justify-between"
+                                    className={`w-full text-left font-sen text-lg font-bold uppercase tracking-wider py-2 border-b border-white/5 flex items-center justify-between transition-colors ${
+                                        activeSection === item.id
+                                            ? "text-[#E50027]"
+                                            : "text-white/80 hover:text-[#E50027]"
+                                    }`}
                                 >
                                     <span>{item.label}</span>
-                                    <ChevronRight className="w-4 h-4 text-white/30" />
+                                    <ChevronRight
+                                        className={`w-4 h-4 ${activeSection === item.id ? "text-[#E50027]" : "text-white/30"}`}
+                                    />
                                 </button>
                             </div>
                         ))}

@@ -65,10 +65,16 @@ export function FooterWordmark() {
 
         return ref;
     }
+    document.addEventListener("resize", () => {
+        const boxRef = useScrollEffect({ start: "top 75%", end: "bottom 25%" });
+    });
     const boxRef = useScrollEffect({ start: "top 75%", end: "bottom 25%" });
     return (
-        <div className="min-h-87.5 relative mx-auto" ref={boxRef}>
-            <div className="mx-auto w-full overflow-hidden pt-20 lg:pt-32 pb-10">
+        <div className="min-h-87.5 relative dark-theme mx-auto">
+            <div
+                className="mx-auto w-full overflow-hidden pt-20 lg:pt-32 pb-10"
+                ref={boxRef}
+            >
                 <h2
                     className="
                         w-full
@@ -78,11 +84,12 @@ export function FooterWordmark() {
                         uppercase
                         leading-[0.8]
                         tracking-[-0.06em]
-                        text-[clamp(3.2rem,11vw,11rem)]
+                        text-[clamp(60px,18.5vw,11rem)]
                     "
                 >
+                    {/* Version sur une ligne : visible seulement à partir de 1800px */}
                     <span className="hidden min-[1800px]:inline">
-                        {"BRIGADE FANTÔME".split("").map((c, i) => (
+                        {"BRIGADE FANTOME".split("").map((c, i) => (
                             <span
                                 key={i}
                                 data-footer-char
@@ -95,8 +102,9 @@ export function FooterWordmark() {
                         ))}
                     </span>
 
-                    <span className="flex flex-col min-[1800px]:hidden items-center justify-center gap-6 sm:gap-10 w-full">
-                        <span className="flex items-center justify-center flex-wrap w-full max-w-full text-[clamp(2.5rem,14vw,12rem)] gap-[clamp(0.25rem,1vw,1.25rem)]">
+                    {/* Version empilée : visible en dessous de 1800px */}
+                    <span className="flex flex-col min-[1800px]:hidden">
+                        <span className="block">
                             {"BRIGADE".split("").map((c, i) => (
                                 <span
                                     key={i}
@@ -111,8 +119,8 @@ export function FooterWordmark() {
                                 </span>
                             ))}
                         </span>
-                        <span className="flex items-center justify-center flex-wrap w-full max-w-full text-[clamp(2.5rem,14vw,12rem)] gap-[clamp(0.25rem,1vw,1.25rem)]">
-                            {"FANTÔME".split("").map((c, i) => (
+                        <span className="block">
+                            {"FANTOME".split("").map((c, i) => (
                                 <span
                                     key={i}
                                     data-footer-char

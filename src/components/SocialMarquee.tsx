@@ -277,6 +277,7 @@ export function SocialInfiniteScroll({
             relative py-32 lg:py-48 bg-surface overflow-hidden bg-[#0B0B0E] border-y
                             border-white/8
       "
+            id="sociallink"
             style={style}
         >
             <div
